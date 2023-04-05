@@ -1,0 +1,17 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+jupyter = "*"
+numpy = "*"
+scipy = "*"
+matplotlib = "*"
+qutip = "*"
+ipympl = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.10"
