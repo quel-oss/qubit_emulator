@@ -1,0 +1,39 @@
+#myChart, #myChart2 {
+    width: 300px;
+    height: 350px;
+}
+
+#line {
+    width: 500px;
+    height: 350px;
+}
+#myDiv{
+   position: absolute;
+   width: 50%;
+   top: 400px; 
+   left: 600px;
+   width: 450px;
+   height: 450px;
+}
+.label {
+    text-align: center;
+    width: 1000px;
+    font-size: 40px;
+    font-weight: bold;
+    margin: 20px;
+}
+.chart_container {
+    float: left;
+}
+#hist {
+   position: absolute;
+   width: 400px;
+   top: 400px; 
+}
+
+#hist2 {
+    position: absolute;
+    width: 400px;
+    top: 400px;
+    left: 600px; 
+ }
