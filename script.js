@@ -13,11 +13,12 @@ async function fetchText() {
   var amp2 = [];
   var amp3 = [];
   var amp4 = [];
+
   for (var i = 0; i < 25; i++) {
-    amp[i] = Math.random()*2-1;
-    amp2[i] = Math.random()*2-1;
-    amp3[i] = Math.random()*2-1;
-    amp4[i] = Math.random()*2-1;
+    amp[i] = sampleData.samples[i].inputq0_I;
+    amp2[i] = sampleData.samples[i].inputq0_Q;
+    amp3[i] = sampleData.samples[i].inputq1_I;
+    amp4[i] = sampleData.samples[i].inputq1_Q;
   }
   
   var data = {
@@ -119,14 +120,26 @@ async function fetchText() {
   var count = 96;
 
   function adddata() {
-    myLineChart.data.datasets[0].data[25] = Math.random() *2-1;
-    myLineChart.data.datasets[0].data.shift();
-    myLineChart.data.datasets[1].data[25] = Math.random() *2-1;
-    myLineChart.data.datasets[1].data.shift();
-    myLineChart2.data.datasets[0].data[25] = Math.random() *2-1;
-    myLineChart2.data.datasets[0].data.shift();
-    myLineChart2.data.datasets[1].data[25] = Math.random() *2-1;
-    myLineChart2.data.datasets[1].data.shift();
+    if (count < 68*4){
+      myLineChart.data.datasets[0].data[25] = sampleData.samples[count/4].inputq0_I;
+      myLineChart.data.datasets[0].data.shift();
+      myLineChart.data.datasets[1].data[25] = sampleData.samples[count/4].inputq0_Q;
+      myLineChart.data.datasets[1].data.shift();
+      myLineChart2.data.datasets[0].data[25] = sampleData.samples[count/4].inputq1_I;
+      myLineChart2.data.datasets[0].data.shift();
+      myLineChart2.data.datasets[1].data[25] = sampleData.samples[count/4].inputq1_Q;
+      myLineChart2.data.datasets[1].data.shift();
+    }
+    // else{
+    //   myLineChart.data.datasets[0].data[25] = Math.random() *2-1;
+    //   myLineChart.data.datasets[0].data.shift();
+    //   myLineChart.data.datasets[1].data[25] = Math.random() *2-1;
+    //   myLineChart.data.datasets[1].data.shift();
+    //   myLineChart2.data.datasets[0].data[25] = Math.random() *2-1;
+    //   myLineChart2.data.datasets[0].data.shift();
+    //   myLineChart2.data.datasets[1].data[25] = Math.random() *2-1;
+    //   myLineChart2.data.datasets[1].data.shift();
+    // }
     count += 4;
     myLineChart.data.labels[25] = count;
     myLineChart.data.labels.shift();
@@ -135,6 +148,7 @@ async function fetchText() {
     myLineChart2.data.labels.shift();
     myLineChart2.update();
     document.getElementById("text").innerHTML = count;
+    document.getElementById("text2").innerHTML = sampleData.samples[10].time;
     fetchText();
 
   }
