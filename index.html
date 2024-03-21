@@ -6,7 +6,7 @@
 
 <body>
   <div id="aligned">
-    <div class="label">Microwave Qubit Emulator(2 Qubits)
+    <div class="label">Microwave Qubit Emulator
     <div  id="line" class="chart_container">
         <canvas id="myChart" width="500" height="300"></canvas>
 </div>
@@ -14,14 +14,18 @@
   <canvas id="myChart2" width="500" height="300"></canvas>
 </div>
 </div>
-<p id="text">a 
+<p id="text">a
 </p>
-<p id="text2">a 
+<p id="text2">a
 </p>
 <input type="button" value="Add Data" onclick="adddata()">
 <input type="button" value="Stop Data" onclick="clearInterval(intervalId)">
 <input type="button" value="Continue Data" onclick="resetInterval()">
+<img id="myImgId" alt="" src="minibloch.png" width="150" height="150" />
 
+<!-- <p>X:<span id="x"></span></p> -->
+<!-- <p>Y:<span id="y"></span></p> -->
+<p>IniQ:<span id="z"></span></p>
 
 <div class="label">
 <div id="hist" class="chart_container">

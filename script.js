@@ -1,4 +1,4 @@
-async function fetchText() { 
+async function fetchText() {
   //var url = "https://raw.githubusercontent.com/brandiqa/json-examples/master/src/db.json";
   //$.getJSON(url, function(json){
   //  document.getElementById('text2').innerHTML = json.clients[ 0 ].name;
@@ -8,7 +8,7 @@ async function fetchText() {
 
   var canvas = document.getElementById('myChart');
   var canvas2 = document.getElementById('myChart2');
-  
+
   var amp = [];
   var amp2 = [];
   var amp3 = [];
@@ -20,7 +20,7 @@ async function fetchText() {
     amp3[i] = sampleData.samples[i].inputq1_I;
     amp4[i] = sampleData.samples[i].inputq1_Q;
   }
-  
+
   var data = {
     labels: Array.from(Array(25), (_, index) => 4*index),
     datasets: [{
@@ -157,9 +157,9 @@ async function fetchText() {
     clearInterval(intervalID);
     var intervalID = window.setInterval(adddata, 500);
   }
-  
+
   var intervalId = window.setInterval(adddata, 500);
-    
+
   const option =  {
       responsive: true,
       plugins:{
@@ -220,7 +220,7 @@ async function fetchText() {
           }
         }
       };
-    
+
   var config = {
       type: 'line',
       data: data,
@@ -232,7 +232,7 @@ async function fetchText() {
       data: data2,
       options: option2
     };
-  
+
   var myLineChart = new Chart(
       canvas,
       config
@@ -242,14 +242,14 @@ async function fetchText() {
     canvas2,
     config2
 );
-  
-  //var data = [data1,data2];
-  
 
-  
+  //var data = [data1,data2];
+
+
+
   var x = [];
   var y = [];
-  
+
   x= [0,0,0,0,2,2,2,2,2];
   y= [2,0,0,0,0,0,2,2,2];
   /*
@@ -280,7 +280,7 @@ async function fetchText() {
   */
   const ctx = document.getElementById('histogram').getContext('2d');
   const ctx2 = document.getElementById('histogram2').getContext('2d');
-  
+
   var myBarChart = new Chart(ctx, {
       type: 'bar',
       data: {
@@ -354,3 +354,67 @@ async function fetchText() {
         },
       }
     });
+
+function printMousePos(event) {
+  document.body.textContent =
+    "clientX: " + event.clientX +
+    " - clientY: " + event.clientY;
+}
+//document.addEventListener("click", printMousePos);
+function FindPosition(oElement)
+{
+  if(typeof( oElement.offsetParent ) != "undefined")
+  {
+    for(var posX = 0, posY = 0; oElement; oElement = oElement.offsetParent)
+    {
+      posX += oElement.offsetLeft;
+      posY += oElement.offsetTop;
+    }
+      return [ posX, posY ];
+    }
+    else
+    {
+      return [ oElement.x, oElement.y ];
+    }
+}
+
+function GetCoordinates(e)
+{
+  var IniQ = 0;
+  var PosX = 0;
+  var PosY = 0;
+  var ImgPos;
+  ImgPos = FindPosition(myImg);
+  if (!e) var e = window.event;
+  if (e.pageX || e.pageY)
+  {
+    PosX = e.pageX;
+    PosY = e.pageY;
+  }
+  else if (e.clientX || e.clientY)
+    {
+      PosX = e.clientX + document.body.scrollLeft
+        + document.documentElement.scrollLeft;
+      PosY = e.clientY + document.body.scrollTop
+        + document.documentElement.scrollTop;
+    }
+  PosX = PosX - ImgPos[0];
+  PosY = PosY - ImgPos[1];
+  if ( (PosX>60 && PosX<90) && (PosY>0 && PosY<30)){    IniQ = 0;  }
+  else if ( (PosX>20 && PosX<50) && (PosY>15 && PosY<45)){    IniQ = 1;  }
+  else if ( (PosX>110 && PosX<140) && (PosY>15 && PosY<45)){    IniQ = 2;  }
+  else if ( (PosX>0 && PosX<30) && (PosY>60 && PosY<90)){    IniQ = 3;  }
+  else if ( (PosX>60 && PosX<90) && (PosY>60 && PosY<90)){    IniQ = 4;  }
+  else if ( (PosX>120 && PosX<150) && (PosY>60 && PosY<90)){    IniQ = 5;  }
+  else if ( (PosX>20 && PosX<50) && (PosY>105 && PosY<135)){    IniQ = 6;  }
+  else if ( (PosX>110 && PosX<140) && (PosY>105 && PosY<135)){    IniQ = 7;  }
+  else if ( (PosX>60 && PosX<90) && (PosY>120 && PosY<150)){    IniQ = 8;  }
+  else{    IniQ = 9;  }
+
+  //document.getElementById("x").innerHTML = PosX;
+  //document.getElementById("y").innerHTML = PosY;
+  document.getElementById("z").innerHTML = IniQ;
+}
+
+var myImg = document.getElementById("myImgId");
+myImg.onmousedown = GetCoordinates;
